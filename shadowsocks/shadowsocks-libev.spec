@@ -2,19 +2,19 @@
 %global debug_package %{nil}
 %global __os_install_post /usr/lib/rpm/brp-compress %{nil}
 
-Name:		shadowsocks-libev
-Version:	2.5.6
-Release:	1%{?dist}
-Summary:	A lightweight and secure socks5 proxy
+Name:       shadowsocks-libev
+Version:    2.5.6
+Release:    1%{?dist}
+Summary:    A lightweight and secure socks5 proxy
 
-Group:		Applications/Internet
-License:	GPLv3+
-URL:		https://github.com/shadowsocks/%{name}
-Source0:	%{url}/archive/v%{version}.tar.gz
+Group:      Applications/Internet
+License:    GPLv3+
+URL:        https://github.com/shadowsocks/%{name}
+Source0:    %{url}/archive/v%{version}.tar.gz
 
 AutoReq:        no
-Conflicts:	    python-shadowsocks python3-shadowsocks
-BuildRequires:	make gcc openssl-devel
+Conflicts:      python-shadowsocks python3-shadowsocks
+BuildRequires:  make gcc openssl-devel
 Requires:       openssl
 
 %if 0%{?fedora} >= 15 || 0%{?rhel} >=7
@@ -67,8 +67,6 @@ install -m 644 %{_builddir}/%{buildsubdir}/debian/shadowsocks-libev-*.service %{
 %endif
 install -m 644 %{_builddir}/%{buildsubdir}/debian/config.json %{buildroot}%{_sysconfdir}/shadowsocks-libev/config.json
 
-%pre
-
 %post
 %if ! 0%{?use_systemd}
 /sbin/chkconfig --add shadowsocks-libev > /dev/null 2>&1 || :
@@ -83,11 +81,7 @@ if [ $1 -eq 0 ]; then
     /sbin/chkconfig --del shadowsocks-libev > /dev/null 2>&1 || :
 fi
 %else
-%if 0%{?suse_version}
-%service_del_preun shadowsocks-libev.service
-%else
 %systemd_preun shadowsocks-libev.service
-%endif
 %endif
 
 %postun
