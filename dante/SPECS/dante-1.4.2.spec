@@ -56,22 +56,23 @@ sed -i -e 's:/etc/socks\.conf:/etc/dante/socks.conf:' \
 #DANTE_LIBC=$(find /%{_lib}/ -maxdepth 1 -iname "libc.so.*"|awk -F '/' '{print $3}')
 DANTE_LIBC=$(find /%{_lib}/ -maxdepth 1 -iname "libc.so.*")
 
-## https://build.opensuse.org/package/view_file/server:proxy/dante/dante.spec
+## error: 'AM_CONFIG_HEADER': this macro is obsolete. You should use the 'AC_CONFIG_HEADERS' macro instead.
 ## https://gitweb.gentoo.org/repo/gentoo.git/tree/net-proxy/dante/dante-1.4.1-r1.ebuild
+## https://build.opensuse.org/package/view_file/server:proxy/dante/dante.spec
 ## https://github.com/pld-linux/dante/blob/master/dante-am.patch
-## warning: The 'AM_PROG_MKDIR_P' macro is deprecated, and will soon be removed.
-## You should use the Autoconf-provided 'AC_PROG_MKDIR_P' macro instead,
 touch acinclude.m4
 sed -i -e 's:AM_CONFIG_HEADER:AC_CONFIG_HEADERS:' configure.ac
 autoreconf --force --install --verbose
 
-### https://gitweb.gentoo.org/repo/gentoo.git/tree/net-proxy/dante/files/dante-1.4.0-cflags.patch
-### NOTE: NOT WORK. configure 'prototypes' check still FAILED
-#CFLAGS=$(echo "%{optflags}"|sed -e 's/ -g\>//g')
+## CFLAGS bug: dante 1.4.2 fix this bug:
 
 ### configure 'prototypes' check FAILED with CFLAGS '-grecord-gcc-switches' option
 ### https://build.opensuse.org/package/view_file/server:proxy/dante/dante.spec
 #CFLAGS=$(echo "%{optflags}" | sed "s|-grecord-gcc-switches||")
+
+### https://gitweb.gentoo.org/repo/gentoo.git/tree/net-proxy/dante/files/dante-1.4.0-cflags.patch
+### NOTE: NOT WORK. configure 'prototypes' check still FAILED
+#CFLAGS=$(echo "%{optflags}"|sed -e 's/ -g\>//g')
 
 ## https://github.com/pld-linux/dante/blob/master/dante-build.patch
 

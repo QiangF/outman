@@ -59,13 +59,13 @@ touch acinclude.m4
 sed -i -e 's:AM_CONFIG_HEADER:AC_CONFIG_HEADERS:' configure.ac
 autoreconf --force --install --verbose
 
-### https://gitweb.gentoo.org/repo/gentoo.git/tree/net-proxy/dante/files/dante-1.4.0-cflags.patch
-### NOTE: NOT WORK. configure 'prototypes' check still FAILED
-#CFLAGS=$(echo "%{optflags}"|sed -e 's/ -g\>//g')
-
 ## configure 'prototypes' check FAILED with CFLAGS '-grecord-gcc-switches' option
 ## https://build.opensuse.org/package/view_file/server:proxy/dante/dante.spec
 CFLAGS=$(echo "%{optflags}" | sed "s|-grecord-gcc-switches||")
+
+### https://gitweb.gentoo.org/repo/gentoo.git/tree/net-proxy/dante/files/dante-1.4.0-cflags.patch
+### NOTE: NOT WORK. configure 'prototypes' check still FAILED
+#CFLAGS=$(echo "%{optflags}"|sed -e 's/ -g\>//g')
 
 ## https://github.com/pld-linux/dante/blob/master/dante-build.patch
 
