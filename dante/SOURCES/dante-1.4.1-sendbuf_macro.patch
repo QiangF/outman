@@ -1,0 +1,11 @@
+--- dante-1.4.1/libscompat.m4.orig	2014-08-02 16:23:48.000000000 -0400
++++ dante-1.4.1/libscompat.m4	2017-01-14 06:22:11.775000000 -0500
+@@ -374,7 +374,7 @@
+ 
+ 	return 0;
+ }], [AC_MSG_RESULT(yes)
+-     AC_DEFINE(HAVE_SENDBUF_IOCTL, TIOCOUTQ, [send buffer data])
++     AC_DEFINE(HAVE_SENDBUF_IOCTL, 1, [send buffer data])
+      AC_DEFINE(SENDBUF_IOCTLVAL, TIOCOUTQ, [send buffer ioctl])],
+     [AC_MSG_RESULT(no)])],
+     [dnl assume no when cross-compiling
