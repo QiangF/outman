@@ -9,8 +9,9 @@ URL:			https://github.com/shadowsocks/%{name}
 Source0:        simple-obfs-0.0.3.tar.gz
 AutoReq:		no
 
-BuildRequires:	gcc make automake autoconf libtool zlib-devel openssl-devel libev-devel libsodium-devel >= 1.0.4 c-ares-devel asciidoc xmlto
-Requires:		zlib openssl libev libsodium >= 1.0.4 c-ares
+#BuildRequires:	gcc make automake autoconf libtool zlib-devel openssl-devel libev-devel libsodium-devel >= 1.0.4 asciidoc xmlto
+BuildRequires:	gcc make automake autoconf libtool zlib-devel openssl-devel libev-devel libsodium-devel >= 1.0.4
+Requires:		zlib openssl libev libsodium >= 1.0.4
 
 %description
 Simple-obfs is a simple obfusacting tool, designed as plugin server of shadowsocks.
@@ -21,7 +22,7 @@ Simple-obfs is a simple obfusacting tool, designed as plugin server of shadowsoc
 %build
 ./autogen.sh
 
-%configure --enable-shared
+%configure --enable-shared --disable-documentation
 
 make %{?_smp_mflags}
 
